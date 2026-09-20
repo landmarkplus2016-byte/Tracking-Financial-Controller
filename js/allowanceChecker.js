@@ -1649,6 +1649,9 @@ const AllowanceChecker = (() => {
                     }
 
                     for (let i = 0; i < sites.length; i++) {
+                        // CCTV job codes are never in the master tracking file — not an error
+                        if (jcs[i].toLowerCase().includes('cctv')) continue;
+
                         const combo      = `${sites[i]}-${jcs[i]}`;
                         const comboLower = combo.toLowerCase();
                         if (!jcSet.has(comboLower)) {
