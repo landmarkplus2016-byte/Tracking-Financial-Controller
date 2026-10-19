@@ -191,7 +191,41 @@
                 if (topbarTitle) {
                     topbarTitle.textContent = btn.textContent.trim();
                 }
+
+                // On mobile the sidebar is a drawer — close it after picking a tab
+                setMobileNav(false);
             });
+        });
+    }
+
+    /* ── Mobile Sidebar Drawer ────────────────────────────────── */
+    const navToggleBtn    = document.getElementById('navToggleBtn');
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+    function setMobileNav(open) {
+        document.body.classList.toggle('nav-open', open);
+        if (sidebarBackdrop) sidebarBackdrop.hidden = !open;
+        if (navToggleBtn) {
+            navToggleBtn.setAttribute('aria-expanded', String(open));
+            navToggleBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        }
+    }
+
+    function initMobileNav() {
+        if (navToggleBtn) {
+            navToggleBtn.addEventListener('click', () => {
+                setMobileNav(!document.body.classList.contains('nav-open'));
+            });
+        }
+        if (sidebarBackdrop) {
+            sidebarBackdrop.addEventListener('click', () => setMobileNav(false));
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') setMobileNav(false);
+        });
+        // Leaving mobile width with the drawer open must not leave the page locked
+        window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => {
+            if (e.matches) setMobileNav(false);
         });
     }
 
@@ -569,6 +603,7 @@
 
     /* ── Initialise ───────────────────────────────────────────── */
     initTabs();
+    initMobileNav();
     AppData.init();
     SiteIdJc.init();
     PocTracking.init();

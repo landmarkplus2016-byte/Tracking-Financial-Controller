@@ -291,7 +291,7 @@ must then be pasted into `APPLIST_ENDPOINT` in `appData.js`.
 - `sw.js` caches all static assets for offline use
 - **Always bump the cache version string in `sw.js` before
   pushing any update**
-- Current cache version: `task-tracker-v2.194`
+- Current cache version: `task-tracker-v2.197`
 - Version format: always two digits after the dot (e.g. `v2.10`,
   `v2.11`) — never single digit minor (not `v2.9`)
 
@@ -303,6 +303,17 @@ must then be pasted into `APPLIST_ENDPOINT` in `appData.js`.
 4. Reopen the installed app to load the update
 
 ## Known Decisions & Gotchas
+
+### Mobile layout
+At `max-width: 900px` the fixed sidebar becomes an off-canvas drawer,
+opened by the hamburger `#navToggleBtn` in the topbar. Toggling adds
+`nav-open` to `<body>` and shows `#sidebarBackdrop`. The drawer closes
+when a tab is picked, the backdrop is tapped, or Escape is pressed
+(`setMobileNav()` / `initMobileNav()` in `app.js`). Further compaction
+happens at `max-width: 640px` (stacked full-width download buttons,
+2-column stat cards, 16px inputs so iOS doesn't zoom). On touch devices
+the "Drag & drop" text is hidden, since only Browse works there. All
+mobile rules sit at the end of `css/styles.css`.
 
 ### Site ID-JC: sheet detection
 Previously hard-coded to `"Invoicing Track"` and `"POC3 Tracking"`.

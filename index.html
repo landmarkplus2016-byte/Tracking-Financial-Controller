@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Tracking-Financial-Controller – Telecom Department</title>
 
     <!-- PWA -->
@@ -19,7 +19,7 @@
 <body>
 
     <!-- ── Sidebar ──────────────────────────────────────────────── -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="appSidebar">
 
         <div class="sidebar-brand">
             <img src="LMP Big Logo.jpg" alt="Landmark Plus" class="sidebar-logo" id="brandLogo">
@@ -75,10 +75,17 @@
 
     </aside>
 
+    <!-- Mobile: dims the page while the sidebar drawer is open -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" hidden></div>
+
     <!-- ── Right Panel ───────────────────────────────────────────── -->
     <div class="page-right">
 
         <header class="topbar">
+            <button class="topbar-menu-btn" id="navToggleBtn" type="button"
+                    aria-label="Open menu" aria-controls="appSidebar" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
             <span class="topbar-title" id="topbarTitle">RF-TX Tracking Update</span>
         </header>
 
